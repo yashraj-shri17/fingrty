@@ -97,6 +97,7 @@ a:hover {
 .btn--primary:hover {
   background: var(--color-teal);
   border-color: var(--color-teal);
+  color: var(--color-white) !important;
   transform: translateY(-2px) scale(1.02);
   box-shadow: 0 15px 30px -10px var(--color-teal) !important;
 }
@@ -108,6 +109,7 @@ a:hover {
 
 .btn--ghost:hover {
   background: var(--color-surface);
+  color: var(--color-navy) !important;
   transform: translateY(-2px);
 }
 
