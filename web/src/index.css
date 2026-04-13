@@ -132,7 +132,7 @@ section:first-of-type {
   min-height: auto;
   display: flex;
   align-items: flex-start; /* Align to top */
-  padding-top: 2rem; /* Match other pages */
+  padding-top: 1rem; /* Reduced from 2rem */
   position: relative;
   background: radial-gradient(circle at top right, #f0f7ff 0%, #ffffff 50%);
 }
@@ -141,7 +141,7 @@ section:first-of-type {
   display: grid;
   grid-template-columns: 1.1fr 0.9fr;
   gap: 4rem;
-  align-items: center;
+  align-items: flex-start;
 }
 
 @media (max-width: 968px) {
@@ -153,11 +153,22 @@ section:first-of-type {
 
 .hero__content {
   z-index: 2;
+  margin-top: 1.2rem; /* Fine-tuned for a 'thoda sa' balanced look */
 }
 
 @media (max-width: 968px) {
   .hero__content {
     margin-top: 0;
+  }
+  .hero__actions {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .hero__actions .btn {
+    margin-left: 0 !important;
+    width: 100%;
+    justify-content: center;
   }
 }
 
@@ -320,4 +331,49 @@ section:first-of-type {
 ::selection {
   background: var(--color-teal);
   color: white;
+}
+
+/* Logo Strip */
+.logo-strip {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 3rem;
+  opacity: 0.6;
+  filter: grayscale(1);
+  transition: all 0.4s ease;
+}
+
+.logo-strip:hover {
+  opacity: 1;
+  filter: grayscale(0);
+}
+
+.logo-strip span {
+  font-weight: 800;
+  font-size: 1.1rem;
+  letter-spacing: 0.1em;
+  color: var(--color-navy);
+}
+
+@media (max-width: 600px) {
+  .logo-strip {
+    gap: 1.5rem;
+  }
+  .logo-strip span {
+    font-size: 0.9rem;
+  }
+}
+
+/* Accessibility */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
 }

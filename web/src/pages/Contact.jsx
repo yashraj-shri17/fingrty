@@ -7,76 +7,100 @@ export default function Contact() {
   if (submitted) {
     return (
       <div className="page" style={{maxWidth: '800px', textAlign: 'center', padding: '10rem 0'}}>
-        <p className="section-label">Success</p>
-        <h1 className="page__title">Message Ready</h1>
-        <p className="block__intro" style={{margin: '0 auto 2rem'}}>
-          Your default email client should have opened with the message drafted. Please remember to click "Send" in your email app.
+        <div className="success-icon" style={{fontSize: '4rem', marginBottom: '1.5rem'}}>📬</div>
+        <p className="section-label">Message Ready</p>
+        <h1 className="page__title">Ready to bridge the gap.</h1>
+        <p className="block__intro" style={{margin: '0 auto 2rem', fontSize: '1rem'}}>
+          Your inquiry has been drafted. Please hit "Send" in your email app to finalize the conversation.
         </p>
         <button onClick={() => setSubmitted(false)} className="btn btn--ghost">
-          Send another message
+          Send another inquiry
         </button>
       </div>
     )
   }
 
   return (
-    <div className="page" style={{maxWidth: '800px'}}>
-      <header style={{ padding: '2rem 0 3rem', textAlign: 'center' }}>
-        <p className="section-label">Connect</p>
-        <h1 className="page__title">Let’s start a conversation</h1>
-        <p className="block__intro" style={{margin: '0 auto'}}>
-          Share a note about your stage and sector. Whether it's fundraising, MIS, or governance, we respond from Bengaluru.
-        </p>
-      </header>
+    <div className="contact-shell">
+      <div className="contact-visual">
+         <div className="contact-visual__content">
+            <span className="section-label" style={{color: 'var(--color-teal)'}}>The Hub</span>
+            <h1 className="contact-visual__title">Let’s fix the missing link.</h1>
+            <p className="contact-visual__sub">
+              Whether you're prepping for Series A or cleaning messy books for an IPO, we respond within 24 hours from Bengaluru.
+            </p>
 
-      <div className="grid-2" style={{alignItems: 'start', gap: '3rem'}}>
-        <div>
-          <article className="action-card" style={{padding: '2rem'}}>
-             <h3 style={{fontSize: '1.2rem'}}>Direct Contact</h3>
-             <p style={{marginBottom: '1rem'}}>
-               <a href="mailto:rk@fingrityadvisors.com" style={{color: 'var(--color-teal)', fontWeight: '600'}}>rk@fingrityadvisors.com</a>
-             </p>
-             <p style={{marginBottom: '1rem'}}>
-               <a href="tel:+919748043992" style={{color: 'var(--color-navy)', fontWeight: '600'}}>+91 97480 43992</a>
-             </p>
-             <p style={{fontSize: '0.9rem', color: 'var(--color-text-muted)'}}>
-               Bengaluru, India
-             </p>
-          </article>
-        </div>
+            <div className="contact-details">
+               <div className="contact-detail-item">
+                  <span className="contact-detail-label">Direct Line</span>
+                  <a href="tel:+919748043992" className="contact-detail-value">+91 97480 43992</a>
+               </div>
+               <div className="contact-detail-item">
+                  <span className="contact-detail-label">Confidential Support</span>
+                  <a href="mailto:rk@fingrityadvisors.com" className="contact-detail-value">rk@fingrityadvisors.com</a>
+               </div>
+               <div className="contact-detail-item">
+                  <span className="contact-detail-label">Location</span>
+                  <span className="contact-detail-value">Bengaluru, India 🇮🇳</span>
+               </div>
+            </div>
 
+            <div className="contact-meta">
+               <p>“Integrity in Finance. Globally.”</p>
+            </div>
+         </div>
+      </div>
+
+      <div className="contact-form-container">
         <form
-          className="contact-form"
+          className="premium-form"
           onSubmit={(e) => {
             e.preventDefault()
             const form = e.target
             const data = new FormData(form)
-            const subject = encodeURIComponent(`Website inquiry: ${data.get('name')}`)
+            const subject = encodeURIComponent(`Fingrity Inquiry: ${data.get('name')} | ${data.get('interest')}`)
             const body = encodeURIComponent(
-              `Name: ${data.get('name')}\nEmail: ${data.get('email')}\n\n${data.get('message')}`,
+              `Context: ${data.get('interest')}\nName: ${data.get('name')}\nEmail: ${data.get('email')}\n\nMessage: ${data.get('message')}`,
             )
             window.location.href = `mailto:rk@fingrityadvisors.com?subject=${subject}&body=${body}`
             setSubmitted(true)
           }}
-          style={{display: 'flex', flexDirection: 'column', gap: '1.5rem'}}
         >
-          <div className="form-group">
-            <label htmlFor="name" className="section-label" style={{fontSize: '0.7rem', marginBottom: '0.5rem'}}>Full Name</label>
-            <input id="name" name="name" type="text" required autoComplete="name" className="modern-input" placeholder="Your name" />
+          <div className="form-row">
+            <div className="form-group">
+              <label htmlFor="name">Full Name</label>
+              <input id="name" name="name" type="text" required placeholder="John Doe" />
+            </div>
+            <div className="form-group">
+              <label htmlFor="email">Work Email</label>
+              <input id="email" name="email" type="email" required placeholder="john@company.com" />
+            </div>
           </div>
 
           <div className="form-group">
-            <label htmlFor="email" className="section-label" style={{fontSize: '0.7rem', marginBottom: '0.5rem'}}>Email Address</label>
-            <input id="email" name="email" type="email" required autoComplete="email" className="modern-input" placeholder="email@company.com" />
+            <label htmlFor="interest">Area of Interest</label>
+            <select id="interest" name="interest" required>
+              <option value="">Select a practice</option>
+              <option value="Fundraising">Fundraising & investor readiness</option>
+              <option value="Strategic Finance">Strategic Finance & MIS</option>
+              <option value="Accounting/Tax">Accounting, Tax & ERP</option>
+              <option value="IPO/Governance">IPO Readiness & Governance</option>
+              <option value="Other">Other Strategic Advisory</option>
+            </select>
           </div>
 
           <div className="form-group">
-            <label htmlFor="message" className="section-label" style={{fontSize: '0.7rem', marginBottom: '0.5rem'}}>Message</label>
-            <textarea id="message" name="message" required rows={5} className="modern-input" placeholder="Tell us about your context..." />
+            <label htmlFor="message">How can we help?</label>
+            <textarea id="message" name="message" required rows={5} placeholder="Tell us about your context and stage..." />
           </div>
 
-          <button type="submit" className="btn btn--primary" style={{width: '100%'}}>
-            Draft Email
+          <div className="form-safety">
+             <span className="lock-icon">🔒</span>
+             <p>All inquiries are strictly confidential.</p>
+          </div>
+
+          <button type="submit" className="btn btn--primary btn--full">
+            Start a Conversation <span>→</span>
           </button>
         </form>
       </div>

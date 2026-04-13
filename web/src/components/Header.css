@@ -2,8 +2,7 @@
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(255, 255, 255, 0.75);
-  backdrop-filter: blur(20px) saturate(180%);
+  background: #ffffff;
   border-bottom: 1px solid var(--color-border);
   transition: all 0.3s var(--ease-in-out);
 }
@@ -23,7 +22,7 @@
 }
 
 .site-header__logo {
-  height: 80px; /* Increased from 64px */
+  height: 80px;
   width: auto;
   transition: transform 0.3s ease;
 }

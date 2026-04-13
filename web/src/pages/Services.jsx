@@ -4,83 +4,114 @@ import './page.css'
 const offerings = [
   {
     num: '01',
-    title: 'Fundraising & Capital',
-    desc: 'Bespoke investor readiness, data-room architecture, and equity structuring for global scale.',
-    points: ['Investor Relations', 'Cap Table Management', 'Valuation Inputs'],
+    title: 'Fundraising & Capital Enablement',
+    desc: 'Strategic support for Series A/B fundraising and institutional-grade debt capital.',
+    details: [
+      'Investor readiness & IPO-ready narratives',
+      'Data-room architecture & diligence support',
+      'Equity-debt structuring & lender negotiations',
+      'Cap-table planning & valuation inputs',
+      'VC & Institutional engagement'
+    ],
     image: '/images/hero1.png'
   },
   {
     num: '02',
-    title: 'Strategic Finance',
-    desc: 'Translating spreadsheets into operational intelligence. We build the unit economics models and MIS dashboards.',
-    points: ['MIS & FP&A', 'Budgeting & AOP', 'Cash Management'],
+    title: 'Strategic Finance & Operational Support',
+    desc: 'Translating operations into financial truth through rigorous analysis and P&L ownership.',
+    details: [
+      'Unit economics & EBITDA optimization',
+      'MIS, FP&A & KPI dashboards',
+      'Budgeting, AOP & long-range plans',
+      'Working capital & cashflow governance',
+      'Cost optimization & ROI discipline'
+    ],
     image: '/images/hero2.png'
   },
   {
     num: '03',
-    title: 'Accounting & Tax',
-    desc: 'The bedrock of business excellence. Clean books, strict compliance, and automated processes.',
-    points: ['Monthly Closure', 'GST Advisory', 'ERP Transition'],
+    title: 'Accounting, Tax & Compliance',
+    desc: 'Building the bedrock of financial integrity with automated workflows and clean records.',
+    details: [
+      'Monthly book closure & accounting hygiene',
+      'GST advisory, audits & representations',
+      'ERP transition, process design & automation',
+      'Statutory audit coordination & closure',
+      'IND AS / IFRS / SOX-aligned controls'
+    ],
     image: '/images/service1.png'
   },
   {
     num: '04',
-    title: 'IPO & Governance',
-    desc: 'Preparing for the public stage. We implement the internal controls, risk assessments, and board-level reporting.',
-    points: ['Listing Planning', 'Internal Controls', 'Board Reporting'],
+    title: 'IPO Readiness & Governance',
+    desc: 'Instilling corporate-grade frameworks to prepare your firm for public markets.',
+    details: [
+      'IPO planning, timelines & listing guidance',
+      'Governance, policy & compliance frameworks',
+      'Internal financial controls (IFC) testing',
+      'Risk assessment & board-level reporting',
+      'Audit readiness & disclosure discipline'
+    ],
     image: '/images/hero1.png'
   }
 ]
 
 export default function Services() {
   return (
-    <div className="page" style={{background: '#fcfdfe'}}>
-      <header style={{ padding: '3rem 0 5rem', textAlign: 'center' }}>
-        <p className="section-label">Tailored Solutions</p>
-        <h1 className="page__title" style={{fontSize: 'clamp(2rem, 5vw, 3.5rem)', fontWeight: '900', letterSpacing: '-0.04em'}}>The Practice.</h1>
-        <p className="block__intro" style={{ margin: '0 auto', maxWidth: '600px', fontSize: '1rem' }}>
-          Four integrated pillars of financial excellence, delivered through a unique layered approach.
+    <div className="page" style={{paddingTop: '6rem'}}>
+      <section className="about-hero" style={{paddingBottom: '2rem'}}>
+        <p className="section-label" style={{color: 'var(--color-teal)'}}>The Practice</p>
+        <h1 className="page__title">Specialized Finance. <span style={{color: 'var(--color-teal)'}}>Institutional DNA.</span></h1>
+        <p className="block__intro" style={{maxWidth: '800px'}}>
+          We don't just provide reports. We embed as your <strong>Fractional Leadership</strong> to fix roadblocks, build systems, and drive capital outcomes.
         </p>
-      </header>
+      </section>
 
-      <div className="stacking-container">
-        {offerings.map((pillar, i) => (
-          <div key={i} className="stack-card" style={{ '--offset': `${i * 12}px` }}>
-            <div className="stack-visual">
-              <img src={pillar.image} alt={`${pillar.title} - Strategic Finance Service`} loading="lazy" />
+      <div className="services-container">
+        {offerings.map((service, i) => (
+          <article key={i} className="service-node">
+            <div className="service-node__visual">
+               <img src={service.image} alt={service.title} loading="lazy" />
+               <div className="service-node__num">{service.num}</div>
             </div>
-            <div className="stack-info" style={{background: i % 2 === 0 ? 'white' : 'var(--color-surface)'}}>
-              <span className="stack-num">Phase {pillar.num}</span>
-              <h2 className="stack-title">{pillar.title}</h2>
-              <p className="stack-body" style={{marginBottom: '1rem'}}>{pillar.desc}</p>
-              
-              <ul className="modern-list" style={{marginBottom: '1.5rem'}}>
-                {pillar.points.map(p => <li key={p} style={{fontSize: '0.85rem', marginBottom: '0.4rem'}}>{p}</li>)}
-              </ul>
-
-              <div className="stack-enquire">
-                 <Link to="/contact" className="btn btn--primary" style={{
-                   padding: '0.85rem 2.25rem', 
-                   fontSize: '0.85rem', 
-                   background: 'var(--color-navy)', 
-                   color: 'white',
-                   display: 'inline-flex',
-                   alignItems: 'center',
-                   gap: '8px',
-                   boxShadow: '0 8px 16px -4px rgba(15, 43, 70, 0.25)'
-                 }}>
-                   Enquire Now <span>→</span>
-                 </Link>
-              </div>
+            <div className="service-node__content">
+               <h2 className="service-node__title">{service.title}</h2>
+               <p className="service-node__desc">{service.desc}</p>
+               <ul className="service-node__list">
+                 {service.details.map((point, idx) => (
+                   <li key={idx}>
+                     <span className="check">✓</span> {point}
+                   </li>
+                 ))}
+               </ul>
             </div>
-          </div>
+          </article>
         ))}
       </div>
 
-      <div style={{ textAlign: 'center', padding: '6rem 0' }}>
-        <h2 style={{fontSize: '2.5rem', fontWeight: '900'}}>Ready to scale?</h2>
-        <Link to="/contact" className="btn btn--primary" style={{marginTop: '2rem'}}>Connect with our team</Link>
-      </div>
+      <section className="block engagement-section">
+        <div className="grid-2">
+           <div>
+              <p className="section-label" style={{color: 'var(--color-teal)'}}>Engagement Models</p>
+              <h2 className="block__title" style={{color: 'white'}}>Flexible Execution.</h2>
+           </div>
+           <div>
+              <div className="engagement-card">
+                 <strong>Project Based</strong>
+                 <span>Focused execution for fundraising, ERP transition, or IPO prep.</span>
+              </div>
+              <div className="engagement-card">
+                 <strong>Retainer / Fractional</strong>
+                 <span>Continuity through Fractional CFO/COO leadership for growing teams.</span>
+              </div>
+           </div>
+        </div>
+      </section>
+      
+      <section style={{textAlign: 'center', padding: '10rem 0'}}>
+        <h3 style={{fontSize: '2rem', marginBottom: '2rem'}}>Ready to institutionalize your finance?</h3>
+        <Link to="/contact" className="btn btn--primary">Start a Consultation ↗</Link>
+      </section>
     </div>
   )
 }
