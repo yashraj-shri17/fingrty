@@ -41,6 +41,13 @@
   border: 1px solid var(--color-border);
 }
 
+@media (max-width: 768px) {
+  .stat-grid {
+    padding: 3rem 1.5rem;
+    gap: 3rem;
+  }
+}
+
 .stat-card {
   text-align: center;
 }
@@ -112,6 +119,12 @@
   transition: all 0.5s var(--ease-in-out);
   position: relative;
   overflow: hidden;
+}
+
+@media (max-width: 768px) {
+  .action-card {
+    padding: 2.5rem 1.5rem;
+  }
 }
 
 .action-card::before {
@@ -433,8 +446,8 @@
 
 .stack-card {
   position: sticky;
-  top: 70px; /* Closer to navbar */
-  min-height: 440px; /* Reduced further by 10% */
+  top: calc(100px + var(--offset, 0px)); /* Better base top + offset */
+  min-height: 440px;
   background: white;
   border-radius: 24px; /* Slightly tighter radius */
   border: 1px solid var(--color-border);
@@ -451,9 +464,20 @@
     grid-template-columns: 1fr;
     height: auto;
     min-height: auto;
+    margin-bottom: 5vh; /* Reduced from 35vh for mobile */
+    top: 100px;
   }
   .stack-info {
-    padding: 3rem !important;
+    padding: 2.5rem 1.5rem 5rem !important;
+  }
+  .stack-enquire {
+    left: 1.5rem;
+    bottom: 2rem;
+    position: relative;
+    margin-top: 2rem;
+  }
+  .stack-visual {
+    height: 300px;
   }
 }
 
@@ -536,5 +560,15 @@
 .gallery-item:hover {
   transform: translateY(-10px);
   border-color: var(--color-teal);
+}
+
+@media (max-width: 768px) {
+  .gallery-item {
+    padding: 2.5rem;
+    min-height: 320px;
+  }
+  .gallery-item h3 {
+    font-size: 1.4rem;
+  }
 }
 

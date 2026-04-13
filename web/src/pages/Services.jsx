@@ -45,7 +45,7 @@ export default function Services() {
 
       <div className="stacking-container">
         {offerings.map((pillar, i) => (
-          <div key={i} className="stack-card" style={{top: `${70 + i * 12}px`}}>
+          <div key={i} className="stack-card" style={{ '--offset': `${i * 12}px` }}>
             <div className="stack-visual">
               <img src={pillar.image} alt={`${pillar.title} - Strategic Finance Service`} loading="lazy" />
             </div>

@@ -112,9 +112,15 @@ a:hover {
 }
 
 section {
-  padding: var(--space-section) 2rem;
+  padding: var(--space-section) 1.5rem;
   max-width: var(--content-max);
   margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+  section {
+    padding: calc(var(--space-section) * 0.8) 1.25rem;
+  }
 }
 
 section:first-of-type {
@@ -147,7 +153,12 @@ section:first-of-type {
 
 .hero__content {
   z-index: 2;
-  margin-top: -10rem; /* Reset negative margin since we are now top-aligned */
+}
+
+@media (max-width: 968px) {
+  .hero__content {
+    margin-top: 0;
+  }
 }
 
 .hero__eyebrow {
@@ -203,6 +214,35 @@ section:first-of-type {
   justify-content: center;
   align-items: center;
   margin-top: 4rem; /* Move visual down */
+}
+
+@media (max-width: 968px) {
+  .hero__visual {
+    height: auto;
+    margin-top: 2rem;
+  }
+  .image-panel {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+  .image-panel__item {
+    height: 180px;
+  }
+  .image-panel__item:nth-child(even) {
+    margin-top: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .image-panel {
+    grid-template-columns: 1fr;
+  }
+  .image-panel__item {
+    height: 220px;
+  }
+  .image-panel__item:nth-child(even) {
+    margin-top: 0;
+  }
 }
 
 .image-panel {

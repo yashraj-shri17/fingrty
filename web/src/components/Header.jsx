@@ -16,7 +16,7 @@ export default function Header() {
     <header className="site-header">
       <div className="site-header__inner">
         <NavLink to="/" className="site-header__brand" end onClick={() => setOpen(false)}>
-          <img src="/logo.png" alt="Fingrity Advisors" width={200} height={48} className="site-header__logo" />
+          <img src="/logo.png" alt="Fingrity Advisors" className="site-header__logo" />
         </NavLink>
         <button
           type="button"
