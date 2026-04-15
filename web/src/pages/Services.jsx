@@ -13,7 +13,7 @@ const offerings = [
       'Cap-table planning & valuation inputs',
       'VC & Institutional engagement'
     ],
-    image: '/images/hero1.png'
+    image: 'https://images.pexels.com/photos/3183190/pexels-photo-3183190.jpeg?auto=compress&cs=tinysrgb&w=800'
   },
   {
     num: '02',
@@ -26,7 +26,7 @@ const offerings = [
       'Working capital & cashflow governance',
       'Cost optimization & ROI discipline'
     ],
-    image: '/images/hero2.png'
+    image: 'https://images.pexels.com/photos/6694543/pexels-photo-6694543.jpeg?auto=compress&cs=tinysrgb&w=800'
   },
   {
     num: '03',
@@ -39,7 +39,7 @@ const offerings = [
       'Statutory audit coordination & closure',
       'IND AS / IFRS / SOX-aligned controls'
     ],
-    image: '/images/service1.png'
+    image: 'https://images.pexels.com/photos/5900222/pexels-photo-5900222.jpeg?auto=compress&cs=tinysrgb&w=800'
   },
   {
     num: '04',
@@ -52,19 +52,24 @@ const offerings = [
       'Risk assessment & board-level reporting',
       'Audit readiness & disclosure discipline'
     ],
-    image: '/images/hero1.png'
+    image: 'https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=800'
   }
 ]
 
 export default function Services() {
   return (
-    <div className="page" style={{paddingTop: '6rem'}}>
-      <section className="about-hero" style={{paddingBottom: '2rem'}}>
+    <div className="page">
+      <section className="about-hero" style={{paddingTop: '3.5rem', paddingBottom: '2rem'}}>
         <p className="section-label" style={{color: 'var(--color-teal)'}}>The Practice</p>
         <h1 className="page__title">Specialized Finance. <span style={{color: 'var(--color-teal)'}}>Institutional DNA.</span></h1>
         <p className="block__intro" style={{maxWidth: '800px'}}>
           We don't just provide reports. We embed as your <strong>Fractional Leadership</strong> to fix roadblocks, build systems, and drive capital outcomes.
         </p>
+        <div className="services-top-badges">
+          <span>Fundraise Ready Systems</span>
+          <span>Execution-Led Advisory</span>
+          <span>Boardroom Grade Governance</span>
+        </div>
       </section>
 
       <div className="services-container">

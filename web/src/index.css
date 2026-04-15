@@ -166,11 +166,16 @@ section:first-of-type {
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    align-items: center;
   }
   .hero__actions .btn {
     margin-left: 0 !important;
-    width: 100%;
+    width: fit-content;
+    min-width: 230px;
+    display: inline-flex;
+    align-items: center;
     justify-content: center;
+    padding-inline: 1.5rem;
   }
 }
 

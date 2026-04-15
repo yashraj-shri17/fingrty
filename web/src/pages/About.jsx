@@ -14,6 +14,10 @@ export default function About() {
           <p className="block__intro" style={{fontSize: '1.25rem', maxWidth: '800px'}}>
             Fingrity Advisors was founded on a simple premise: Founders shouldn't have to choose between startup speed and institutional-grade financial discipline.
           </p>
+          <div className="about-hero__quote">
+            <span>Founder-first. Institution-ready.</span>
+            <p>Every engagement is engineered for confidence in boardrooms, diligence rooms, and day-to-day execution.</p>
+          </div>
         </div>
       </section>
 
@@ -68,7 +72,7 @@ export default function About() {
               <a href="https://www.linkedin.com/in/rahulkanodiark" target="_blank" rel="noreferrer" className="btn btn--ghost" style={{marginTop: '2rem'}}>LinkedIn ↗</a>
             </div>
             <div className="profile-image-container">
-               <img src="/images/hero1.png" alt="Rahul Kanodia" className="profile-img-placeholder" />
+               <img src="https://images.pexels.com/photos/2182970/pexels-photo-2182970.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Rahul Kanodia" className="profile-img-placeholder" />
             </div>
           </div>
 
@@ -77,7 +81,7 @@ export default function About() {
           {/* Rupali's Profile */}
           <div className="profile-grid profile-grid--reversed">
              <div className="profile-image-container">
-               <img src="/images/service1.png" alt="Rupali Kanodia" className="profile-img-placeholder" />
+               <img src="https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Rupali Kanodia" className="profile-img-placeholder" />
             </div>
             <div className="profile-info">
               <span className="profile-lens">The Institutional Lens | Finance & Compliance</span>

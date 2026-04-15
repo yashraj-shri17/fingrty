@@ -2,6 +2,12 @@ import { Link } from 'react-router-dom'
 import './page.css'
 
 export default function Home() {
+  const heroHighlights = [
+    { value: '$119M+', label: 'Capital Enabled' },
+    { value: '0', label: 'Audit Observations' },
+    { value: '15,000CR', label: 'Turnover Managed' }
+  ]
+
   return (
     <>
       <section className="hero">
@@ -22,18 +28,26 @@ export default function Home() {
                 The Practice ↗
               </Link>
             </div>
+            <div className="hero-mini-stats fade-in delay-3">
+              {heroHighlights.map((item) => (
+                <div key={item.label} className="hero-mini-stat">
+                  <span>{item.value}</span>
+                  <small>{item.label}</small>
+                </div>
+              ))}
+            </div>
           </div>
           
           <div className="hero__visual fade-in delay-2">
             <div className="image-panel">
               <div className="image-panel__item">
-                <img src="/images/hero1.png" alt="Strategic financial planning and analysis" loading="lazy" />
+                <img src="https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Strategic financial planning and analysis" loading="lazy" />
               </div>
               <div className="image-panel__item">
-                <img src="/images/hero2.png" alt="Collaborative corporate strategy meeting" loading="lazy" />
+                <img src="https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Collaborative corporate strategy meeting" loading="lazy" />
               </div>
               <div className="image-panel__item">
-                <img src="/images/service1.png" alt="Corporate governance and compliance structure" loading="lazy" />
+                <img src="https://images.pexels.com/photos/3184296/pexels-photo-3184296.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Corporate governance and compliance structure" loading="lazy" />
               </div>
               <div className="image-panel__item" style={{display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'var(--color-navy)', color: 'white', flexDirection: 'column'}}>
                 <span className="image-panel__stat-text">$119M+</span>
@@ -91,13 +105,37 @@ export default function Home() {
         </section>
 
         <section className="block">
-           <div style={{textAlign: 'center', marginBottom: '5rem'}}>
+           <div className="paradox-head">
               <p className="section-label">The Strategy</p>
-              <h2 className="block__title" style={{fontSize: 'clamp(2rem, 5vw, 3.5rem)', margin: '0 auto 1.5rem', maxWidth: '900px'}}>The Growth Paradox</h2>
-              <p className="block__intro" style={{margin: '0 auto', fontSize: '1.25rem', lineHeight: '1.6'}}>
-                 As you scale, the gap between <strong>Vison</strong> and <strong>Discipline</strong> widens. Fundraising stalls due to messy data rooms. Cash-flow surprises kill runway. Compliance risks threaten valuation. 
-                 <br /><br />
-                 We solve the <strong>Missing Link</strong>.
+              <h2 className="block__title paradox-title">The Growth Paradox</h2>
+              <p className="block__intro paradox-intro">
+                 Growth looks exciting outside, but inside the finance engine usually starts breaking quietly. We close the gap between founder speed and institutional discipline before it hurts valuation.
+              </p>
+           </div>
+
+           <div className="paradox-grid">
+              <article className="paradox-card">
+                <span className="paradox-card__tag">01 | Data Room Friction</span>
+                <h3>Fundraising momentum slows down.</h3>
+                <p>Numbers live in scattered sheets, monthly closure slips, and investor queries take too long to answer.</p>
+              </article>
+              <article className="paradox-card">
+                <span className="paradox-card__tag">02 | Cashflow Blindspots</span>
+                <h3>Runway gets risky without warning.</h3>
+                <p>Collections, payables, and burn are managed reactively, creating avoidable pressure during critical growth stages.</p>
+              </article>
+              <article className="paradox-card">
+                <span className="paradox-card__tag">03 | Compliance Overhang</span>
+                <h3>Execution speed drops near audits.</h3>
+                <p>Teams scramble at period-end when controls are weak, reducing leadership bandwidth for core business priorities.</p>
+              </article>
+           </div>
+
+           <div className="paradox-solution">
+              <p className="paradox-solution__label">How We Fix It</p>
+              <p>
+                We install <strong>clean closure rhythms</strong>, <strong>board-ready MIS</strong>, and <strong>governance discipline</strong> so your
+                finance function becomes a growth lever, not a growth blocker.
               </p>
            </div>
         </section>
@@ -207,7 +245,7 @@ export default function Home() {
               </ul>
             </div>
             <div className="visual-block">
-              <img src="/images/hero2.png" alt="Clean and organized financial reporting" className="feature-img" loading="lazy" />
+              <img src="https://images.pexels.com/photos/4386341/pexels-photo-4386341.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Clean and organized financial reporting" className="feature-img" loading="lazy" />
               <div className="floating-card">
                 <p style={{fontSize: '0.9rem', fontWeight: '700', color: 'var(--color-navy)', marginBottom: '0.5rem'}}>Bengaluru Hub</p>
                 <p style={{fontSize: '0.85rem', color: 'var(--color-text-muted)', margin: 0}}>Serving global scale-ups from the heart of India’s startup capital.</p>
