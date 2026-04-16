@@ -4,8 +4,8 @@ import './page.css'
 export default function Home() {
   const heroHighlights = [
     { value: '$119M+', label: 'Capital Enabled' },
-    { value: '0', label: 'Audit Observations' },
-    { value: '15,000CR', label: 'Turnover Managed' }
+    { value: 'Billion $', label: 'Turnover Managed' },
+    { value: '25+ Yrs', label: 'Leadership DNA' }
   ]
 
   return (
@@ -81,24 +81,34 @@ export default function Home() {
               <p className="section-label" style={{color: 'var(--color-teal)'}}>The Proof</p>
               <h2 className="block__title" style={{color: 'white'}}>Unwavering Results.</h2>
               <p className="block__intro" style={{color: 'rgba(255,255,255,0.7)', fontSize: '1.1rem'}}>
-                Our institutional DNA comes from leadership roles at <strong>Amazon JVs, EY, & PwC</strong>. We deliver more than just advice; we deliver execution.
+                Bridging the gap between founder speed and institutional discipline. We deliver boardroom-ready execution, not just advice.
               </p>
-              <div className="stat-grid-inline" style={{display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem', marginTop: '2rem'}}>
+              <div className="stat-grid-inline" style={{display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(120px, 1fr))', gap: '2rem', marginTop: '3.5rem'}}>
                 <div>
-                  <span className="stat-value" style={{color: 'var(--color-teal)', fontSize: '2.5rem', display: 'block'}}>Zero</span>
-                  <span className="stat-label" style={{color: 'white', opacity: 0.8, fontSize: '0.85rem'}}>Statutory Audit Observation Record</span>
+                  <span className="stat-value" style={{color: 'var(--color-teal)', fontSize: '2.5rem', display: 'block', fontWeight: 800}}>25+ Yrs</span>
+                  <span className="stat-label" style={{color: 'white', opacity: 0.6, fontSize: '0.7rem', textTransform: 'uppercase', letterSpacing: '0.1em'}}>Leadership</span>
                 </div>
                 <div>
-                  <span className="stat-value" style={{color: 'var(--color-teal)', fontSize: '2.5rem', display: 'block'}}>$119M+</span>
-                  <span className="stat-label" style={{color: 'white', opacity: 0.8, fontSize: '0.85rem'}}>VC & Debt Capital Supported</span>
+                  <span className="stat-value" style={{color: 'var(--color-teal)', fontSize: '2.5rem', display: 'block', fontWeight: 800}}>$119M+</span>
+                  <span className="stat-label" style={{color: 'white', opacity: 0.6, fontSize: '0.7rem', textTransform: 'uppercase', letterSpacing: '0.1em'}}>Momentum</span>
+                </div>
+                <div>
+                  <span className="stat-value" style={{color: 'var(--color-teal)', fontSize: '2.5rem', display: 'block', fontWeight: 800}}>15k CR+</span>
+                  <span className="stat-label" style={{color: 'white', opacity: 0.6, fontSize: '0.7rem', textTransform: 'uppercase', letterSpacing: '0.1em'}}>Scale</span>
                 </div>
               </div>
             </div>
-            <div className="visual-block">
-               <ul className="modern-list" style={{color: 'white'}}>
-                 <li style={{color: 'white'}}>Managed <strong>INR 15,000CR</strong> turnover at Scale</li>
-                 <li style={{color: 'white'}}>ERP Transition & Process Automation Specialist</li>
-                 <li style={{color: 'white'}}>IND AS / IFRS / SOX-aligned controls</li>
+            <div className="results-panel">
+               <ul className="modern-list" style={{color: 'white', marginTop: 0}}>
+                 <li style={{color: 'white', marginBottom: '1rem'}}>
+                   <strong>Institutional Scale:</strong> Managed billion-dollar P&Ls and global turnovers.
+                 </li>
+                 <li style={{color: 'white', marginBottom: '1rem'}}>
+                   <strong>Modern Systems:</strong> End-to-end ERP Transition & Process Automation.
+                 </li>
+                 <li style={{color: 'white'}}>
+                   <strong>Governance:</strong> Institutional SOX & IFRS aligned controllership.
+                 </li>
                </ul>
             </div>
           </div>
@@ -164,7 +174,7 @@ export default function Home() {
             <div className="rhythm-card">
                <div className="rhythm-step">04</div>
                <h3>Governance</h3>
-               <p>Long-term board reporting, risk assessment, and maintaining zero-observation audit readiness.</p>
+               <p>Long-term board reporting, risk assessment, and maintaining institutional-grade audit readiness.</p>
             </div>
           </div>
         </section>
@@ -254,23 +264,6 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="block">
-          <p className="section-label">Sectors</p>
-          <h2 className="block__title">Contextual Experience</h2>
-          <div className="sector-pills" style={{marginTop: '2rem'}}>
-            {[
-              'Healthcare & MedTech',
-              'Consumer & D2C',
-              'Agri-Tech',
-              'FinTech & Payments',
-              'SaaS & platforms',
-              'Retail & distribution',
-              'Manufacturing',
-            ].map((s) => (
-              <span key={s}>{s}</span>
-            ))}
-          </div>
-        </section>
       </div>
     </>
   )

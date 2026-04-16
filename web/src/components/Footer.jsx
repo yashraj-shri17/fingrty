@@ -37,7 +37,6 @@ export default function Footer() {
           <h2 className="footer-heading" style={{marginTop: '2rem'}}>Direct</h2>
           <ul className="footer-links">
              <li><a href="mailto:rk@fingrityadvisors.com">rk@fingrityadvisors.com</a></li>
-             <li><a href="tel:+919748043992">+91 97480 43992</a></li>
           </ul>
         </div>
       </div>

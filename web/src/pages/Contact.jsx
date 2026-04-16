@@ -32,10 +32,6 @@ export default function Contact() {
 
             <div className="contact-details">
                <div className="contact-detail-item">
-                  <span className="contact-detail-label">Direct Line</span>
-                  <a href="tel:+919748043992" className="contact-detail-value">+91 97480 43992</a>
-               </div>
-               <div className="contact-detail-item">
                   <span className="contact-detail-label">Confidential Support</span>
                   <a href="mailto:rk@fingrityadvisors.com" className="contact-detail-value">rk@fingrityadvisors.com</a>
                </div>

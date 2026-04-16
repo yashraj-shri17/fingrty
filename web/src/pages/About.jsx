@@ -27,7 +27,7 @@ export default function About() {
           <div className="value-card">
             <span className="value-icon">🎯</span>
             <h3>Precision</h3>
-            <p>Amazon-grade MIS and error-free statutory hygiene. No observations, no surprises.</p>
+            <p>Amazon-grade MIS and error-free statutory hygiene. Built for scale, built for trust.</p>
           </div>
           <div className="value-card">
             <span className="value-icon">🤝</span>
@@ -91,7 +91,7 @@ export default function About() {
                   Rupali instills financial discipline and operational efficiency at scale. Her expertise lies in building robust frameworks for controllership, audit, and tax compliance across high-complexity environments.
                 </p>
                 <p>
-                  She has led financial reporting and statutory audits for billion-dollar turnover entities, ensuring zero-observation hygiene and SOX-aligned controls.
+                  She has led financial reporting and statutory audits for billion-dollar turnover entities, ensuring institutional hygiene and SOX-aligned controls.
                 </p>
               </div>
               <div className="past-badges">

@@ -6,10 +6,10 @@
   --color-accent: #3b82f6;
   --color-white: #ffffff;
   --color-bg: #ffffff;
-  --color-surface: #f3f7f9;
-  --color-text: #1a2d3d;
-  --color-text-muted: #4a5f72;
-  --color-border: #e2e9ef;
+  --color-surface: #eef2f6; 
+  --color-text: #101820;
+  --color-text-muted: #334155;
+  --color-border: #cbd5e1;
   --font-heading: 'Outfit', 'Inter', system-ui, sans-serif;
   --font-body: 'Inter', system-ui, sans-serif;
   --space-section: clamp(2.5rem, 6vw, 5rem);
@@ -114,14 +114,17 @@ a:hover {
 }
 
 section {
-  padding: var(--space-section) 1.5rem;
+  padding: var(--space-section) 1rem;
   max-width: var(--content-max);
   margin: 0 auto;
 }
 
 @media (max-width: 768px) {
+  .hero {
+    padding: 3rem 1rem 3rem !important;
+  }
   section {
-    padding: calc(var(--space-section) * 0.8) 1.25rem;
+    padding: calc(var(--space-section) * 0.8) 0.8rem;
   }
 }
 
@@ -362,6 +365,12 @@ section:first-of-type {
   font-size: 1.1rem;
   letter-spacing: 0.1em;
   color: var(--color-navy);
+}
+
+@media (max-width: 768px) {
+  .block {
+    padding: 6rem 1rem;
+  }
 }
 
 @media (max-width: 600px) {

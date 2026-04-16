@@ -1061,6 +1061,30 @@ a.contact-detail-value:hover {
 }
 
 /* Sector Grid */
+.block {
+  padding: 8rem 0;
+  max-width: var(--content-max);
+  margin: 0 auto;
+  position: relative;
+}
+
+/* Subtle Section Syndication (Standard Hairline) */
+.block:not(:last-of-type)::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 10%;
+  right: 10%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(15, 43, 70, 0.25), transparent);
+}
+
+@media (max-width: 768px) {
+  .block {
+    padding: 6rem 1.5rem;
+  }
+}
+
 .sector-grid-premium {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -1422,3 +1446,24 @@ a.contact-detail-value:hover {
   }
 }
 
+
+.results-panel {
+  background: rgba(255, 255, 255, 0.03);
+  padding: 3.5rem;
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+@media (max-width: 768px) {
+  .results-panel {
+    padding: 1.25rem !important;
+    margin-top: 1.5rem;
+    border-radius: 12px;
+  }
+  .block .grid-2 {
+    padding: 2.5rem 0.5rem !important;
+  }
+}
