@@ -1,7 +1,9 @@
 import { useState } from 'react'
 import './page.css'
+import { useContent } from '../ContentContext'
 
 export default function Contact() {
+  const { t } = useContent();
   const [submitted, setSubmitted] = useState(false)
 
   if (submitted) {
@@ -24,25 +26,25 @@ export default function Contact() {
     <div className="contact-shell">
       <div className="contact-visual">
          <div className="contact-visual__content">
-            <span className="section-label" style={{color: 'var(--color-teal)'}}>The Hub</span>
-            <h1 className="contact-visual__title">Let’s fix the missing link.</h1>
+            <span className="section-label" style={{color: 'var(--color-teal)'}}>{t('contact_hero_label', 'The Hub')}</span>
+            <h1 className="contact-visual__title">{t('contact_hero_title', 'Let’s fix the missing link.')}</h1>
             <p className="contact-visual__sub">
-              Whether you're prepping for Series A or cleaning messy books for an IPO, we respond within 24 hours from Bengaluru.
+              {t('contact_hero_sub', 'Whether you\'re prepping for Series A or cleaning messy books for an IPO, we respond within 24 hours from Bengaluru.')}
             </p>
 
             <div className="contact-details">
                <div className="contact-detail-item">
-                  <span className="contact-detail-label">Confidential Support</span>
-                  <a href="mailto:rk@fingrityadvisors.com" className="contact-detail-value">rk@fingrityadvisors.com</a>
+                  <span className="contact-detail-label">{t('contact_detail_conf_label', 'Confidential Support')}</span>
+                  <a href={`mailto:${t('contact_detail_conf_value', 'rk@fingrityadvisors.com')}`} className="contact-detail-value">{t('contact_detail_conf_value', 'rk@fingrityadvisors.com')}</a>
                </div>
                <div className="contact-detail-item">
-                  <span className="contact-detail-label">Location</span>
-                  <span className="contact-detail-value">Bengaluru, India 🇮🇳</span>
+                  <span className="contact-detail-label">{t('contact_detail_loc_label', 'Location')}</span>
+                  <span className="contact-detail-value">{t('contact_detail_loc_value', 'Bengaluru, India 🇮🇳')}</span>
                </div>
             </div>
 
             <div className="contact-meta">
-               <p>“Integrity in Finance. Globally.”</p>
+               <p>{t('contact_meta_text', '“Integrity in Finance. Globally.”')}</p>
             </div>
          </div>
       </div>
@@ -58,7 +60,7 @@ export default function Contact() {
             const body = encodeURIComponent(
               `Context: ${data.get('interest')}\nName: ${data.get('name')}\nEmail: ${data.get('email')}\n\nMessage: ${data.get('message')}`,
             )
-            window.location.href = `mailto:rk@fingrityadvisors.com?subject=${subject}&body=${body}`
+            window.location.href = `mailto:${t('contact_detail_conf_value', 'rk@fingrityadvisors.com')}?subject=${subject}&body=${body}`
             setSubmitted(true)
           }}
         >
@@ -92,7 +94,7 @@ export default function Contact() {
 
           <div className="form-safety">
              <span className="lock-icon">🔒</span>
-             <p>All inquiries are strictly confidential.</p>
+             <p>{t('contact_safety_text', 'All inquiries are strictly confidential.')}</p>
           </div>
 
           <button type="submit" className="btn btn--primary btn--full">

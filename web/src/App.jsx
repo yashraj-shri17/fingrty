@@ -7,6 +7,8 @@ import Services from './pages/Services.jsx'
 import Contact from './pages/Contact.jsx'
 import NotFound from './pages/NotFound.jsx'
 
+import Admin from './pages/admin/Admin.jsx'
+
 export default function App() {
   return (
     <Layout>
@@ -16,6 +18,7 @@ export default function App() {
         <Route path="/about" element={<About />} />
         <Route path="/services" element={<Services />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/changewithfingrty" element={<Admin />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Layout>
