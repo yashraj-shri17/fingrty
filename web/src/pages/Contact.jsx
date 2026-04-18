@@ -6,20 +6,55 @@ export default function Contact() {
   const { t } = useContent();
   const [submitted, setSubmitted] = useState(false)
 
+  const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+  const WEB3_KEY = '1f7bccdc-3bac-4619-b195-91b35030417e';
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const data = Object.fromEntries(formData);
+    
+    setSubmitted(true); // Show success UI early for better UX
+
+    try {
+      // 1. Send to Web3Forms for Email
+      fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          access_key: WEB3_KEY,
+          from_name: "Fingrity Website",
+          subject: `New Lead: ${data.name} | ${data.interest}`,
+          ...data
+        })
+      });
+
+      // 2. Send to Backend for Storage
+      fetch(`${API_URL}/api/contact`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+      
+    } catch (err) {
+      console.error("Submission error", err);
+    }
+  };
+
   if (submitted) {
     return (
       <div className="page" style={{maxWidth: '800px', textAlign: 'center', padding: '10rem 0'}}>
-        <div className="success-icon" style={{fontSize: '4rem', marginBottom: '1.5rem'}}>📬</div>
-        <p className="section-label">Message Ready</p>
-        <h1 className="page__title">Ready to bridge the gap.</h1>
+        <div className="success-icon" style={{fontSize: '4rem', marginBottom: '1.5rem'}}>📩</div>
+        <p className="section-label">Message Received</p>
+        <h1 className="page__title">Strategizing Your Response.</h1>
         <p className="block__intro" style={{margin: '0 auto 2rem', fontSize: '1rem'}}>
-          Your inquiry has been drafted. Please hit "Send" in your email app to finalize the conversation.
+          Your inquiry has been received. We review all strategic requests within 24 hours.
         </p>
         <button onClick={() => setSubmitted(false)} className="btn btn--ghost">
           Send another inquiry
         </button>
       </div>
-    )
+    );
   }
 
   return (
@@ -50,20 +85,7 @@ export default function Contact() {
       </div>
 
       <div className="contact-form-container">
-        <form
-          className="premium-form"
-          onSubmit={(e) => {
-            e.preventDefault()
-            const form = e.target
-            const data = new FormData(form)
-            const subject = encodeURIComponent(`Fingrity Inquiry: ${data.get('name')} | ${data.get('interest')}`)
-            const body = encodeURIComponent(
-              `Context: ${data.get('interest')}\nName: ${data.get('name')}\nEmail: ${data.get('email')}\n\nMessage: ${data.get('message')}`,
-            )
-            window.location.href = `mailto:${t('contact_detail_conf_value', 'rk@fingrityadvisors.com')}?subject=${subject}&body=${body}`
-            setSubmitted(true)
-          }}
-        >
+        <form className="premium-form" onSubmit={handleSubmit}>
           <div className="form-row">
             <div className="form-group">
               <label htmlFor="name">Full Name</label>

@@ -7,6 +7,8 @@ const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
 export default function AdminDashboard() {
   const { refreshContent } = useContent();
   const [content, setContent] = useState([]);
+  const [submissions, setSubmissions] = useState([]);
+  const [view, setView] = useState('content'); // 'content' or 'leads'
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [message, setMessage] = useState('');
@@ -19,7 +21,37 @@ export default function AdminDashboard() {
 
   useEffect(() => {
     fetchContent();
+    fetchSubmissions();
   }, []);
+
+  const fetchSubmissions = async () => {
+    try {
+      const res = await fetch(`${API_URL}/api/submissions`, {
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
+      if (res.ok) {
+        const data = await res.json();
+        setSubmissions(data);
+      }
+    } catch (err) {
+      console.error("Inquiry fetch error", err);
+    }
+  };
+
+  const deleteSubmission = async (id) => {
+    if (!window.confirm('Delete this inquiry?')) return;
+    try {
+      const res = await fetch(`${API_URL}/api/submissions/${id}`, {
+        method: 'DELETE',
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
+      if (res.ok) {
+        setSubmissions(prev => prev.filter(s => s.id !== id));
+      }
+    } catch (err) {
+      console.error("Failed to delete", err);
+    }
+  };
 
   const fetchContent = async (retryCount = 0) => {
     try {
@@ -154,12 +186,26 @@ export default function AdminDashboard() {
           {sortedPages.map(page => (
             <button 
               key={page} 
-              className={`menu-item ${activePage === page ? 'is-active' : ''}`}
-              onClick={() => scrollToPage(page)}
+              className={`menu-item ${view === 'content' && activePage === page ? 'is-active' : ''}`}
+              onClick={() => {
+                setView('content');
+                scrollToPage(page);
+              }}
             >
               {page.replace(/^\d+\s/, '')}
             </button>
           ))}
+
+          <p className="menu-label" style={{marginTop: '2rem'}}>Inquiries</p>
+          <button 
+            className={`menu-item ${view === 'leads' ? 'is-active' : ''}`}
+            onClick={() => {
+              setView('leads');
+              setShowNav(false);
+            }}
+          >
+            Leads {submissions.length > 0 && <span style={{float: 'right', background: 'var(--adm-teal)', color: 'white', padding: '2px 8px', borderRadius: '10px', fontSize: '0.7rem'}}>{submissions.length}</span>}
+          </button>
         </div>
 
         <div className="nav-footer">
@@ -174,29 +220,65 @@ export default function AdminDashboard() {
           <div className="mobile-header-row">
             <button className="btn-menu-toggle" onClick={() => setShowNav(true)}>MENU</button>
             <div className="header-info">
-               <h1>{activePage.replace(/^\d+\s/, '')} Configuration</h1>
-               <p>Live Dashboard Sync</p>
+               <h1>{view === 'leads' ? 'Customer Inquiries' : activePage.replace(/^\d+\s/, '') + ' Configuration'}</h1>
+               <p>{view === 'leads' ? 'Lead Management' : 'Live Dashboard Sync'}</p>
             </div>
           </div>
-          <button 
-            className={`btn-publish ${saving ? 'is-syncing' : ''}`} 
-            onClick={handleSave} 
-            disabled={saving}
-          >
-            {saving ? 'Syncing...' : 'Sync Live Site'}
-          </button>
+          {view === 'content' && (
+            <button 
+              className={`btn-publish ${saving ? 'is-syncing' : ''}`} 
+              onClick={handleSave} 
+              disabled={saving}
+            >
+              {saving ? 'Syncing...' : 'Sync Live Site'}
+            </button>
+          )}
         </header>
 
         {message && <div className="admin-toast">{message}</div>}
 
         <div className="workspace-scroll" ref={scrollContainerRef}>
-          {sortedPages.map((page) => {
-            const sections = groupedContent[page];
-            return (
-              <section key={page} className="page-workspace" ref={el => sectionRefs.current[page] = el}>
-                <div className="workspace-intro">
-                   <h2>{page.replace(/^\d+\s/, '')}</h2>
-                </div>
+          {view === 'leads' ? (
+            <div className="page-workspace">
+              <div className="workspace-intro">
+                <h2>Inquiries</h2>
+              </div>
+              
+              <div className="leads-list">
+                {submissions.length === 0 ? (
+                  <p style={{color: '#94a3b8', textAlign: 'center', padding: '4rem'}}>No inquiries yet.</p>
+                ) : (
+                  submissions.map(lead => (
+                    <div key={lead.id} className="lead-card">
+                       <div className="lead-header">
+                          <div>
+                            <h3>{lead.name}</h3>
+                            <a href={`mailto:${lead.email}`} style={{color: 'var(--adm-teal)', fontSize: '0.9rem', textDecoration: 'none'}}>{lead.email}</a>
+                          </div>
+                          <button className="btn-delete" onClick={() => deleteSubmission(lead.id)}>✕</button>
+                       </div>
+                       <div className="lead-intent">
+                          <strong>Interested in:</strong> {lead.interest}
+                       </div>
+                       <div className="lead-message">
+                          {lead.message}
+                       </div>
+                       <div className="lead-footer">
+                          {new Date(lead.created_at).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' })}
+                       </div>
+                    </div>
+                  ))
+                )}
+              </div>
+            </div>
+          ) : (
+            sortedPages.map((page) => {
+              const sections = groupedContent[page];
+              return (
+                <section key={page} className="page-workspace" ref={el => sectionRefs.current[page] = el}>
+                  <div className="workspace-intro">
+                     <h2>{page.replace(/^\d+\s/, '')}</h2>
+                  </div>
 
                 {Object.keys(sections).sort().map((section) => (
                   <div key={section} className="section-block">

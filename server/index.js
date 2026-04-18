@@ -60,6 +60,14 @@ const initDb = async () => {
         section TEXT,
         label TEXT
       );
+      CREATE TABLE IF NOT EXISTS contact_submissions (
+        id SERIAL PRIMARY KEY,
+        name TEXT NOT NULL,
+        email TEXT NOT NULL,
+        interest TEXT,
+        message TEXT,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+      );
     `);
     console.log('Database initialized');
   } catch (err) {
@@ -120,7 +128,43 @@ app.post('/api/content', authenticateToken, async (req, res) => {
   }
 });
 
+
+// Contact/Leads endpoints
+app.post('/api/contact', async (req, res) => {
+  const { name, email, interest, message } = req.body;
+  try {
+    const result = await pool.query(
+      'INSERT INTO contact_submissions (name, email, interest, message) VALUES ($1, $2, $3, $4) RETURNING *',
+      [name, email, interest, message]
+    );
+    res.json({ success: true, data: result.rows[0] });
+  } catch (err) {
+    console.error('Contact error:', err);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+app.get('/api/submissions', authenticateToken, async (req, res) => {
+  try {
+    const result = await pool.query('SELECT * FROM contact_submissions ORDER BY created_at DESC');
+    res.json(result.rows);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+app.delete('/api/submissions/:id', authenticateToken, async (req, res) => {
+  const { id } = req.params;
+  try {
+    await pool.query('DELETE FROM contact_submissions WHERE id = $1', [id]);
+    res.json({ success: true });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 const PORT = process.env.PORT || 5000;
+
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });

@@ -509,6 +509,81 @@
   background: var(--adm-teal);
 }
 
+/* Leads Tracking */
+.leads-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.lead-card {
+  background: #fff;
+  border: 1px solid var(--adm-border);
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+}
+
+.lead-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+}
+
+.lead-header h3 {
+  font-size: 1.1rem;
+  font-weight: 800;
+  margin-bottom: 0.25rem;
+}
+
+.btn-delete {
+  background: #fef2f2;
+  color: #ef4444;
+  border: none;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  font-size: 0.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-delete:hover {
+  background: #ef4444;
+  color: #fff;
+}
+
+.lead-intent {
+  font-size: 0.85rem;
+  color: #64748b;
+  margin-bottom: 1rem;
+}
+
+.lead-intent strong {
+  color: var(--adm-text);
+}
+
+.lead-message {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #334155;
+  background: #f8fafc;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.lead-footer {
+  font-size: 0.75rem;
+  color: #94a3b8;
+  font-family: monospace;
+}
+
+
 .login-error {
   color: #ef4444;
   font-size: 0.85rem;
