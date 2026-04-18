@@ -5,96 +5,86 @@ import { useContent } from '../ContentContext'
 export default function Services() {
   const { t, h } = useContent();
 
-  const offerings = [
+  const services = [
     {
       num: '01',
-      title: t('services_offering1_title', 'Fundraising & Capital Enablement'),
-      desc: t('services_offering1_desc', 'Strategic support for Series A/B fundraising and institutional-grade debt capital.'),
-      details: t('services_offering1_list', 'Investor readiness & IPO-ready narratives, Data-room architecture & diligence support, Equity-debt structuring & lender negotiations, Cap-table planning & valuation inputs, VC & Institutional engagement').split(',').map(s => s.trim()),
-      image: t('services_offering1_img', 'https://images.pexels.com/photos/3183190/pexels-photo-3183190.jpeg?auto=compress&cs=tinysrgb&w=800')
+      tag: 'CAPITAL',
+      title: t('services_s1_title', 'Fundraising & Readiness'),
+      desc: t('services_s1_desc', 'Strategic Series A/B narratives, data-room architecture, and institutional-grade capital structuring.'),
+      points: ['Equity/Debt Strategy', 'Narrative Refinement', 'Due Diligence Prep'],
+      img: 'https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=1200'
     },
     {
       num: '02',
-      title: t('services_offering2_title', 'Strategic Finance & Operational Support'),
-      desc: t('services_offering2_desc', 'Translating operations into financial truth through rigorous analysis and P&L ownership.'),
-      details: t('services_offering2_list', 'Unit economics & EBITDA optimization, MIS, FP&A & KPI dashboards, Budgeting, AOP & long-range plans, Working capital & cashflow governance, Cost optimization & ROI discipline').split(',').map(s => s.trim()),
-      image: t('services_offering2_img', 'https://images.pexels.com/photos/6694543/pexels-photo-6694543.jpeg?auto=compress&cs=tinysrgb&w=800')
+      tag: 'STRATEGY',
+      title: t('services_s2_title', 'Strategic Finance & P&L'),
+      desc: t('services_s2_desc', 'Fractional CFO leadership to master unit economics, P&L ownership, and EBITDA optimization.'),
+      points: ['Unit Economics', 'MIS & FP&A', 'AOP & Budgeting'],
+      img: 'https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg?auto=compress&cs=tinysrgb&w=1200'
     },
     {
       num: '03',
-      title: t('services_offering3_title', 'Accounting, Tax & Compliance'),
-      desc: t('services_offering3_desc', 'Building the bedrock of financial integrity with automated workflows and clean records.'),
-      details: t('services_offering3_list', 'Monthly book closure & accounting hygiene, GST advisory, audits & representations, ERP transition, process design & automation, Statutory audit coordination & closure, IND AS / IFRS / SOX-aligned controls').split(',').map(s => s.trim()),
-      image: t('services_offering3_img', 'https://images.pexels.com/photos/5900222/pexels-photo-5900222.jpeg?auto=compress&cs=tinysrgb&w=800')
+      tag: 'BEDROCK',
+      title: t('services_s3_title', 'Accounting & Automation'),
+      desc: t('services_s3_desc', 'Error-free controllership through ERP transitions and tax-efficient automated book closure.'),
+      points: ['ERP Automation', 'GST/Tax Governance', 'Audit Coordination'],
+      img: 'https://images.pexels.com/photos/6694543/pexels-photo-6694543.jpeg?auto=compress&cs=tinysrgb&w=1200'
     },
     {
       num: '04',
-      title: t('services_offering4_title', 'IPO Readiness & Governance'),
-      desc: t('services_offering4_desc', 'Instilling corporate-grade frameworks to prepare your firm for public markets.'),
-      details: t('services_offering4_list', 'IPO planning, timelines & listing guidance, Governance, policy & compliance frameworks, Internal financial controls (IFC) testing, Risk assessment & board-level reporting, Audit readiness & disclosure discipline').split(',').map(s => s.trim()),
-      image: t('services_offering4_img', 'https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=800')
+      tag: 'GOVERNANCE',
+      title: t('services_s4_title', 'IPO & Public Readiness'),
+      desc: t('services_s4_desc', 'Institutional discipline and SOX-aligned controls for successful public-market entry.'),
+      points: ['Board Reporting', 'IFC & Risk Audits', 'Listing Compliance'],
+      img: 'https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=1200'
     }
-  ]
-
-  const heroBadges = t('services_hero_badges', 'Fundraise Ready Systems, Execution-Led Advisory, Boardroom Grade Governance').split(',').map(s => s.trim());
+  ];
 
   return (
-    <div className="page">
-      <section className="about-hero" style={{paddingTop: '3.5rem', paddingBottom: '2rem'}}>
-        <p className="section-label" style={{color: 'var(--color-teal)'}}>{t('services_hero_label', 'The Practice')}</p>
-        <h1 className="page__title" dangerouslySetInnerHTML={{ __html: h('services_hero_title', 'Specialized Finance. [Institutional DNA.]') }}></h1>
-        <p className="block__intro" style={{maxWidth: '800px'}}>
-          {t('services_hero_intro', 'We don\'t just provide reports. We embed as your Fractional Leadership to fix roadblocks, build systems, and drive capital outcomes.')}
+    <div className="page" style={{ paddingTop: '2rem' }}>
+      <header style={{ paddingBottom: '3rem', textAlign: 'center' }}>
+        <span className="section-label">{t('services_hero_label', 'The Practice')}</span>
+        <h1 className="block__title" dangerouslySetInnerHTML={{ __html: h('services_hero_title', 'Strategic Execution. <br/>[Institutional DNA]') }}></h1>
+        <p className="block__intro" style={{margin: '0 auto'}}>
+          {t('services_hero_intro', 'We embed as Fractional Leadership to solve operational bottlenecks and drive boardroom-ready outcomes.')}
         </p>
-        <div className="services-top-badges">
-          {heroBadges.map((b, i) => <span key={i}>{b}</span>)}
-        </div>
-      </section>
+      </header>
 
-      <div className="services-container">
-        {offerings.map((service, i) => (
-          <article key={i} className="service-node">
-            <div className="service-node__visual">
-               <img src={service.image} alt={service.title} loading="lazy" />
-               <div className="service-node__num">{service.num}</div>
+      {/* The Quadrants System */}
+      <section className="quadrant-system">
+        {services.map((s, i) => (
+          <article key={i} className="quadrant-node">
+            <div className="quad-visual">
+               <img src={s.img} alt={s.title} />
+               <div className="quad-overlay" />
             </div>
-            <div className="service-node__content">
-               <h2 className="service-node__title">{service.title}</h2>
-               <p className="service-node__desc">{service.desc}</p>
-               <ul className="service-node__list">
-                 {service.details.map((point, idx) => (
-                   <li key={idx}>
-                     <span className="check">✓</span> {point}
-                   </li>
-                 ))}
-               </ul>
+            <div className="quad-content">
+               <span className="quad-num">{s.num}</span>
+               <span className="quad-tag">{s.tag}</span>
+               <h2 className="quad-title">{s.title}</h2>
+               <div className="quad-details">
+                  <p>{s.desc}</p>
+                  <ul className="quad-list">
+                    {s.points.map((p, j) => <li key={j}>{p}</li>)}
+                  </ul>
+               </div>
             </div>
           </article>
         ))}
-      </div>
+      </section>
 
-      <section className="block engagement-section">
-        <div className="grid-2">
-           <div>
-              <p className="section-label" style={{color: 'var(--color-teal)'}}>{t('services_eng_label', 'Engagement Models')}</p>
-              <h2 className="block__title" style={{color: 'white'}}>{t('services_eng_title', 'Flexible Execution.')}</h2>
+      {/* Unified Engagement Block */}
+      <section className="block" style={{marginTop: '6rem'}}>
+        <div className="engagement-banner">
+           <div className="eng-text">
+              <span className="section-label" style={{color: 'white'}}>Engagement Models</span>
+              <h2 style={{color: 'white', fontSize: '3rem', margin: '1rem 0'}}>Fractional or Project Based.</h2>
+              <p style={{color: 'rgba(255,255,255,0.7)', fontSize: '1.2rem'}}>We adapt to your scale—whether it's a 3-month high-impact mission or continuous P&L ownership.</p>
            </div>
-           <div>
-              <div className="engagement-card">
-                 <strong>{t('services_eng1_title', 'Project Based')}</strong>
-                 <span>{t('services_eng1_desc', 'Focused execution for fundraising, ERP transition, or IPO prep.')}</span>
-              </div>
-              <div className="engagement-card">
-                 <strong>{t('services_eng2_title', 'Retainer / Fractional')}</strong>
-                 <span>{t('services_eng2_desc', 'Continuity through Fractional CFO/COO leadership for growing teams.')}</span>
-              </div>
+           <div className="eng-actions">
+              <Link to="/contact" className="btn btn--primary" style={{background: 'var(--color-teal)', border: 'none'}}>Partner with us ↗</Link>
            </div>
         </div>
-      </section>
-      
-      <section style={{textAlign: 'center', padding: '10rem 0'}}>
-        <h3 style={{fontSize: '2rem', marginBottom: '2rem'}}>{t('services_cta_text', 'Ready to institutionalize your finance?')}</h3>
-        <Link to="/contact" className="btn btn--primary">Start a Consultation ↗</Link>
       </section>
     </div>
   )

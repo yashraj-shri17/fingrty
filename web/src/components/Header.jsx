@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, Link } from 'react-router-dom'
 import './Header.css'
 
 const nav = [
@@ -43,6 +43,13 @@ export default function Header() {
               </li>
             ))}
           </ul>
+          
+          <Link to="/coaching" className="nav-coaching-badge" onClick={() => setOpen(false)}>
+            <span className="badge-glow"></span>
+            <span className="badge-text">
+              Coach
+            </span>
+          </Link>
         </nav>
       </div>
     </header>

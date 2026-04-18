@@ -18,16 +18,17 @@ export default function Layout({ children }) {
           top: 0,
           left: 0,
           right: 0,
-          background: 'var(--color-teal)',
+          background: '#0d9488',
           color: 'white',
           textAlign: 'center',
-          fontSize: '0.75rem',
-          padding: '0.25rem',
+          fontSize: '0.65rem',
+          padding: '0.5rem',
           zIndex: 9999,
-          fontWeight: 600,
-          letterSpacing: '0.05em'
+          fontWeight: 800,
+          letterSpacing: '0.1em',
+          textTransform: 'uppercase'
         }}>
-          BE PATIENT • SERVER IS WAKING UP...
+          Establishing secure connection to server...
         </div>
       )}
       {!isAdminPage && <div className="top-accent" aria-hidden />}

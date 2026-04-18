@@ -1,0 +1,175 @@
+/* Fullscreen Edge-To-Edge Coaching Look */
+
+.coaching-hero-fullscreen {
+  position: relative;
+  width: 100%;
+  min-height: 120vh; /* Oversized cinematic height for extra majesty */
+  background-image: url('https://images.pexels.com/photos/3778602/pexels-photo-3778602.jpeg?auto=compress&cs=tinysrgb&w=2000');
+  background-size: cover;
+  background-position: center right;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.coaching-hero-fullscreen::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  /* Smooth transparent gradient from left to right ensures text is legible */
+  background: linear-gradient(to right, rgba(245, 248, 250, 1) 0%, rgba(245, 248, 250, 0.95) 25%, transparent 65%);
+  z-index: 1;
+}
+
+.coaching-hero-content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 750px; /* Only constrains the text wrapping, not position */
+  padding-left: 4vw; /* Anchors the block firmly to the left edge of screen */
+  padding-right: 2rem;
+}
+
+.coaching-title {
+  font-family: 'Playfair Display', serif;
+  font-weight: 800;
+  font-size: clamp(3rem, 6vw, 5rem);
+  color: #383533; 
+  line-height: 1.05;
+  margin-bottom: 2rem;
+  letter-spacing: -0.02em;
+}
+
+.accent-dot {
+  color: #009dcd; 
+}
+
+.coaching-desc {
+  font-family: inherit;
+  font-size: 1.15rem;
+  color: #6a6a6a; 
+  line-height: 1.6;
+  margin-bottom: 3rem;
+  font-weight: 400;
+  max-width: 480px;
+}
+
+.coaching-actions {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.btn-learn {
+  background-color: #009dcd;
+  color: white;
+  font-family: inherit;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  padding: 1.25rem 2.5rem;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 158, 205, 0.2);
+}
+
+.btn-learn:hover {
+  background-color: #0083ab;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 158, 205, 0.3);
+}
+
+.btn-watch {
+  background: transparent;
+  border: none;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  cursor: pointer;
+  color: #383533;
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 700;
+  transition: opacity 0.3s ease;
+}
+
+.btn-watch:hover {
+  opacity: 0.7;
+}
+
+.play-icon-blue {
+  width: 46px;
+  height: 46px;
+  background-color: #009dcd;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-left: 2px;
+  transition: transform 0.3s ease;
+}
+
+.btn-watch:hover .play-icon-blue {
+  transform: scale(1.1);
+}
+
+.fade-up {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: smoothReveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.delay-1 { animation-delay: 0.1s; }
+.delay-2 { animation-delay: 0.3s; }
+.delay-3 { animation-delay: 0.5s; }
+
+@keyframes smoothReveal {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 1024px) {
+  .coaching-hero-fullscreen {
+    background-position: center;
+  }
+  .coaching-hero-fullscreen::before {
+    background: linear-gradient(to bottom, rgba(245, 248, 250, 0.95) 0%, rgba(245, 248, 250, 0.85) 60%, transparent 100%);
+  }
+  .coaching-hero-content {
+    padding: 0 5vw;
+  }
+  .coaching-title {
+    font-size: 3.2rem;
+  }
+  .coaching-actions {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 768px) {
+  .coaching-hero-fullscreen {
+    min-height: 85vh; 
+  }
+  .coaching-hero-content {
+    padding: 0 6vw;
+  }
+  .coaching-hero-fullscreen::before {
+    background: linear-gradient(to bottom, rgba(245, 248, 250, 0.95) 0%, rgba(245, 248, 250, 0.9) 70%, transparent 100%);
+  }
+  .coaching-title {
+    font-size: 2.3rem; 
+    margin-top: 2rem;
+  }
+  .coaching-desc {
+    font-size: 1.05rem;
+  }
+  .coaching-actions {
+    gap: 1.5rem;
+  }
+}
