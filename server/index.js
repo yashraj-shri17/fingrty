@@ -9,9 +9,24 @@ const app = express();
 app.use(cors());
 app.use(express.json({ limit: '10mb' })); // Increased limit for large content
 
-// Health check endpoint for Render wakeup
-app.get('/api/health', (req, res) => {
-  res.json({ status: 'ok', message: 'Server is awake' });
+// Health check endpoint for Render wakeup (handles both /health and /api/health)
+app.get(['/health', '/api/health'], async (req, res) => {
+  try {
+    // Quick DB check
+    await pool.query('SELECT 1');
+    res.json({ 
+      status: 'ok', 
+      message: 'Server is awake',
+      database: 'connected',
+      timestamp: new Date().toISOString()
+    });
+  } catch (err) {
+    res.status(500).json({ 
+      status: 'error', 
+      message: 'Server is awake but database is disconnected',
+      error: err.message 
+    });
+  }
 });
 
 
