@@ -24,25 +24,26 @@ export default function AdminDashboard() {
   const fetchContent = async (retryCount = 0) => {
     try {
       const res = await fetch(`${API_URL}/api/content`, {
-        signal: AbortSignal.timeout(10000)
+        signal: AbortSignal.timeout(15000) // 15s per attempt
       });
       
       if (!res.ok) throw new Error('Not ready');
 
       const data = await res.json();
       setContent(data);
+      setMessage('');
       if (data.length > 0) {
         const pages = [...new Set(data.map(i => i.page))].sort();
         setActivePage(pages[0]);
       }
       setLoading(false);
     } catch (err) {
-      if (retryCount < 5) {
-        console.log(`Retrying admin fetch (${retryCount + 1})...`);
-        setTimeout(() => fetchContent(retryCount + 1), 5000 * (retryCount + 1));
+      if (retryCount < 12) { // Allow up to ~3 minutes of waking up
+        setMessage(`Server is waking up. This takes 1-2 minutes on free tier... (Attempt ${retryCount + 1})`);
+        setTimeout(() => fetchContent(retryCount + 1), 7000); 
       } else {
         setLoading(false);
-        setMessage('Network error. Server might be down.');
+        setMessage('Network error. Backend failed to wake up after 3 minutes.');
       }
     }
   };
@@ -71,7 +72,8 @@ export default function AdminDashboard() {
         setMessage('Dashboard successfully synced with public site.');
         setTimeout(() => setMessage(''), 5000);
       } else {
-        setMessage('Failed to publish. Check your connection.');
+        const errorData = await res.json().catch(() => ({}));
+        setMessage(`Publish failed: ${errorData.error || errorData.message || 'Status ' + res.status}`);
       }
     } catch (err) {
       setMessage('Network error.');
