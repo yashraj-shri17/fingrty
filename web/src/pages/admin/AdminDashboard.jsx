@@ -341,9 +341,10 @@ export default function AdminDashboard() {
                     </div>
                   </div>
                 ))}
-              </section>
-            );
-          })}
+                </section>
+              );
+            })
+          )}
         </div>
       </main>
     </div>
