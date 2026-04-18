@@ -7,20 +7,38 @@ const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
 export const ContentProvider = ({ children }) => {
   const [contentMap, setContentMap] = useState({});
   const [loading, setLoading] = useState(true);
+  const [serverStatus, setServerStatus] = useState('checking'); // checking, waking, online, error
 
-  const fetchContent = async () => {
+  const fetchContent = async (retryCount = 0) => {
     try {
-      const res = await fetch(`${API_URL}/api/content`);
+      if (retryCount === 0) setServerStatus('checking');
+      
+      const res = await fetch(`${API_URL}/api/content`, {
+        signal: AbortSignal.timeout(10000) // 10s timeout per attempt
+      });
+      
+      if (!res.ok) throw new Error('Server not ready');
+
       const data = await res.json();
       const map = data.reduce((acc, item) => {
         acc[item.key] = item.content;
         return acc;
       }, {});
+      
       setContentMap(map);
-    } catch (err) {
-      console.error('Failed to fetch content', err);
-    } finally {
+      setServerStatus('online');
       setLoading(false);
+    } catch (err) {
+      console.error(`Fetch attempt ${retryCount + 1} failed:`, err.message);
+      
+      // If server is sleeping (timeout or 503/502), retry up to 5 times (total ~60-90s)
+      if (retryCount < 5) {
+        setServerStatus('waking');
+        setTimeout(() => fetchContent(retryCount + 1), 5000 * (retryCount + 1)); // Exponential backoff-ish
+      } else {
+        setServerStatus('error');
+        setLoading(false);
+      }
     }
   };
 
@@ -42,7 +60,7 @@ export const ContentProvider = ({ children }) => {
   };
 
   return (
-    <ContentContext.Provider value={{ t, h, loading, refreshContent: fetchContent }}>
+    <ContentContext.Provider value={{ t, h, loading, serverStatus, refreshContent: fetchContent }}>
       {children}
     </ContentContext.Provider>
   );

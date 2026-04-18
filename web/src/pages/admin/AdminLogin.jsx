@@ -18,7 +18,8 @@ export default function AdminLogin({ onLogin }) {
       const res = await fetch(`${API_URL}/api/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password })
+        body: JSON.stringify({ email, password }),
+        signal: AbortSignal.timeout(15000) // Don't hang forever
       });
       const data = await res.json();
       if (res.ok) {
@@ -28,7 +29,11 @@ export default function AdminLogin({ onLogin }) {
         setError(data.message || 'Invalid credentials');
       }
     } catch (err) {
-      setError('Connection error. Is the server running?');
+      if (err.name === 'TimeoutError' || err.message.includes('fetch')) {
+        setError('Server is still waking up. Please wait 10 seconds and try again.');
+      } else {
+        setError('Connection error. Is the server running?');
+      }
     }
     setLoading(false);
   };

@@ -9,6 +9,12 @@ const app = express();
 app.use(cors());
 app.use(express.json({ limit: '10mb' })); // Increased limit for large content
 
+// Health check endpoint for Render wakeup
+app.get('/api/health', (req, res) => {
+  res.json({ status: 'ok', message: 'Server is awake' });
+});
+
+
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
   ssl: { rejectUnauthorized: false } // Common requirement for Neon/Heroku
