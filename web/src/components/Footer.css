@@ -2,7 +2,7 @@
   margin-top: auto;
   background: var(--color-surface);
   color: var(--color-text-muted);
-  padding: 4rem 2rem 2.5rem;
+  padding: 4rem max(1.25rem, env(safe-area-inset-right)) max(2.5rem, env(safe-area-inset-bottom)) max(1.25rem, env(safe-area-inset-left));
   border-top: 1px solid var(--color-border);
 }
 

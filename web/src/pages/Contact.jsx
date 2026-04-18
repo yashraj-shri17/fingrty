@@ -43,7 +43,7 @@ export default function Contact() {
 
   if (submitted) {
     return (
-      <div className="page" style={{maxWidth: '800px', textAlign: 'center', padding: '10rem 0'}}>
+      <div className="page page--narrow page--success">
         <div className="success-icon" style={{fontSize: '4rem', marginBottom: '1.5rem'}}>📩</div>
         <p className="section-label">Message Received</p>
         <h1 className="page__title">Strategizing Your Response.</h1>

@@ -159,7 +159,7 @@ export default function Home() {
            </div>
         </section>
 
-        <section className="block" style={{backgroundColor: 'var(--color-surface)', borderRadius: 'var(--radius)', padding: '6rem 4rem'}}>
+        <section className="block block--surface">
            <div className="grid-2">
               <div>
                  <p className="section-label">{t('home_rhythm_label', 'Engagement')}</p>

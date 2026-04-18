@@ -28,6 +28,8 @@
 
 html {
   scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 body {
@@ -39,6 +41,19 @@ body {
   background: var(--color-bg);
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
+}
+
+@media (max-width: 768px) {
+  body {
+    font-size: 1rem;
+  }
+
+  .btn {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
 }
 
 /* Set the default 100% scale to look exactly like the browser's 80% scale on Desktop */
@@ -271,8 +286,10 @@ section:first-of-type {
   transition: transform 10s linear;
 }
 
-.carousel-frame:hover .carousel-frame__img {
-  transform: scale(1.1);
+@media (hover: hover) and (pointer: fine) {
+  .carousel-frame:hover .carousel-frame__img {
+    transform: scale(1.1);
+  }
 }
 
 .carousel-frame__overlay {
@@ -348,7 +365,7 @@ section:first-of-type {
     gap: 1rem;
   }
   .hero__actions-centered .btn {
-    width: 250px;
+    width: min(100%, 17.5rem);
     margin: 0 !important;
   }
 }

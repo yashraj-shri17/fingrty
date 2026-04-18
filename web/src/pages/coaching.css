@@ -3,7 +3,8 @@
 .coaching-hero-fullscreen {
   position: relative;
   width: 100%;
-  min-height: 120vh; /* Oversized cinematic height for extra majesty */
+  min-height: 100vh;
+  min-height: 100dvh;
   background-image: url('https://images.pexels.com/photos/3778602/pexels-photo-3778602.jpeg?auto=compress&cs=tinysrgb&w=2000');
   background-size: cover;
   background-position: center right;
@@ -11,6 +12,12 @@
   display: flex;
   align-items: center;
   overflow: hidden;
+}
+
+@media (min-width: 900px) {
+  .coaching-hero-fullscreen {
+    min-height: 115vh;
+  }
 }
 
 .coaching-hero-fullscreen::before {
@@ -27,8 +34,9 @@
   z-index: 2;
   width: 100%;
   max-width: 750px; /* Only constrains the text wrapping, not position */
-  padding-left: 4vw; /* Anchors the block firmly to the left edge of screen */
-  padding-right: 2rem;
+  padding-left: max(4vw, env(safe-area-inset-left));
+  padding-right: max(1.25rem, env(safe-area-inset-right));
+  padding-bottom: max(1.5rem, env(safe-area-inset-bottom));
 }
 
 .coaching-title {
@@ -141,7 +149,7 @@
     background: linear-gradient(to bottom, rgba(245, 248, 250, 0.95) 0%, rgba(245, 248, 250, 0.85) 60%, transparent 100%);
   }
   .coaching-hero-content {
-    padding: 0 5vw;
+    padding: 0 max(5vw, env(safe-area-inset-right)) max(1.5rem, env(safe-area-inset-bottom)) max(5vw, env(safe-area-inset-left));
   }
   .coaching-title {
     font-size: 3.2rem;
@@ -154,10 +162,16 @@
 
 @media (max-width: 768px) {
   .coaching-hero-fullscreen {
-    min-height: 85vh; 
+    min-height: min(100dvh, 900px);
+    align-items: flex-start;
+    padding-top: max(0.5rem, env(safe-area-inset-top));
   }
   .coaching-hero-content {
-    padding: 0 6vw;
+    padding-left: max(1.25rem, env(safe-area-inset-left), 5vw);
+    padding-right: max(1.25rem, env(safe-area-inset-right), 5vw);
+  }
+  .coaching-desc br {
+    display: none;
   }
   .coaching-hero-fullscreen::before {
     background: linear-gradient(to bottom, rgba(245, 248, 250, 0.95) 0%, rgba(245, 248, 250, 0.9) 70%, transparent 100%);

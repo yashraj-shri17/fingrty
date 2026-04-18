@@ -78,7 +78,7 @@ export default function Services() {
         <div className="engagement-banner">
            <div className="eng-text">
               <span className="section-label" style={{color: 'white'}}>Engagement Models</span>
-              <h2 style={{color: 'white', fontSize: '3rem', margin: '1rem 0'}}>Fractional or Project Based.</h2>
+              <h2 className="eng-headline">Fractional or Project Based.</h2>
               <p style={{color: 'rgba(255,255,255,0.7)', fontSize: '1.2rem'}}>We adapt to your scale—whether it's a 3-month high-impact mission or continuous P&L ownership.</p>
            </div>
            <div className="eng-actions">

@@ -3,7 +3,7 @@ import './page.css'
 
 export default function NotFound() {
   return (
-    <div className="page" style={{ textAlign: 'center', padding: '10rem 0' }}>
+    <div className="page page--narrow page--centered">
       <p className="section-label">404 Error</p>
       <h1 className="page__title">Page not found</h1>
       <p className="block__intro" style={{ margin: '0 auto 2rem' }}>
