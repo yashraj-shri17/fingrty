@@ -270,6 +270,25 @@
   letter-spacing: 0.01em;
 }
 
+.btn-inline-upload {
+  background: var(--adm-teal);
+  color: #fff;
+  padding: 0.85rem 1rem;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  font-weight: 800;
+  cursor: pointer;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.2s;
+}
+
+.btn-inline-upload:hover {
+  opacity: 0.9;
+}
+
 .field-input-cell input, .field-input-cell textarea {
   width: 100%;
   border: 1px solid #e2e8f0;

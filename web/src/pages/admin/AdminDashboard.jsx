@@ -52,6 +52,45 @@ export default function AdminDashboard() {
     setContent(prev => prev.map(item => item.id === id ? { ...item, content: value } : item));
   };
 
+  const handleImageUpload = async (id, file) => {
+    if (!file) return;
+
+    // Show immediate feedback
+    setMessage('Processing image...');
+
+    const reader = new FileReader();
+    reader.onload = async (e) => {
+      const img = new Image();
+      img.onload = () => {
+        const canvas = document.createElement('canvas');
+        let width = img.width;
+        let height = img.height;
+
+        // Max dimensions for web optimality
+        const MAX_WIDTH = 1200;
+        if (width > MAX_WIDTH) {
+          height = (MAX_WIDTH / width) * height;
+          width = MAX_WIDTH;
+        }
+
+        canvas.width = width;
+        canvas.height = height;
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0, width, height);
+
+        // Compress and convert to Base64 (WebP for best size/quality balance)
+        const compressedBase64 = canvas.toDataURL('image/webp', 0.8);
+        
+        // Update state
+        handleChange(id, compressedBase64);
+        setMessage('Image ready to sync.');
+        setTimeout(() => setMessage(''), 3000);
+      };
+      img.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  };
+
   const handleSave = async () => {
     if (saving) return;
     setSaving(true);
@@ -194,12 +233,24 @@ export default function AdminDashboard() {
                                       onChange={(e) => handleChange(item.id, e.target.value)}
                                       placeholder={`Enter ${item.label.toLowerCase()}...`}
                                     />
+                                    {isImg && (
+                                      <label className="btn-inline-upload">
+                                        Upload
+                                        <input 
+                                          type="file" 
+                                          accept="image/*" 
+                                          onChange={(e) => handleImageUpload(item.id, e.target.files[0])} 
+                                          hidden 
+                                        />
+                                      </label>
+                                    )}
                                     {isImg && item.content && (
                                       <div className="img-preview-bubble">
                                         <img src={item.content} alt="Preview" />
                                       </div>
                                     )}
                                  </div>
+
                                )}
                             </div>
                           </div>
