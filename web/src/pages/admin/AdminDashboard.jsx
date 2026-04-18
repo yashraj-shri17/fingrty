@@ -21,9 +21,14 @@ export default function AdminDashboard() {
     fetchContent();
   }, []);
 
-  const fetchContent = async () => {
+  const fetchContent = async (retryCount = 0) => {
     try {
-      const res = await fetch(`${API_URL}/api/content`);
+      const res = await fetch(`${API_URL}/api/content`, {
+        signal: AbortSignal.timeout(10000)
+      });
+      
+      if (!res.ok) throw new Error('Not ready');
+
       const data = await res.json();
       setContent(data);
       if (data.length > 0) {
@@ -32,7 +37,13 @@ export default function AdminDashboard() {
       }
       setLoading(false);
     } catch (err) {
-      setLoading(false);
+      if (retryCount < 5) {
+        console.log(`Retrying admin fetch (${retryCount + 1})...`);
+        setTimeout(() => fetchContent(retryCount + 1), 5000 * (retryCount + 1));
+      } else {
+        setLoading(false);
+        setMessage('Network error. Server might be down.');
+      }
     }
   };
 

@@ -7,10 +7,12 @@ export default function Layout({ children }) {
   const location = useLocation();
   const { serverStatus } = useContent();
   const isAdminPage = location.pathname === '/changewithfingrty';
+  const isChatPage = location.pathname === '/chatwithfingrty';
+  const showBanner = serverStatus === 'waking' && (isAdminPage || isChatPage);
 
   return (
     <div className="site-shell">
-      {serverStatus === 'waking' && (
+      {showBanner && (
         <div style={{
           position: 'fixed',
           top: 0,
