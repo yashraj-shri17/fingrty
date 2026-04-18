@@ -157,10 +157,6 @@ export default function AdminDashboard() {
               <section key={page} className="page-workspace" ref={el => sectionRefs.current[page] = el}>
                 <div className="workspace-intro">
                    <h2>{page.replace(/^\d+\s/, '')}</h2>
-                   <div className="quick-tips">
-                      <span>💡 <strong>[bracket]</strong> to highlight words</span>
-                      <span>💡 <strong>comma</strong> for list items</span>
-                   </div>
                 </div>
 
                 {Object.keys(sections).sort().map((section) => (
@@ -176,6 +172,12 @@ export default function AdminDashboard() {
                             <div className="field-label-cell">
                                 <label>{item.label}</label>
                                 <span className="field-meta">ID: {item.key}</span>
+                                {item.key.endsWith('_title') && (
+                                  <span className="field-hint">💡 Use [bracket] to highlight</span>
+                                )}
+                                {(item.key.endsWith('_list') || item.key.endsWith('_badges')) && (
+                                  <span className="field-hint">💡 Use comma , for list</span>
+                                )}
                             </div>
                             <div className="field-input-cell">
                                {isLong && !isImg ? (

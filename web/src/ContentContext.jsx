@@ -31,10 +31,10 @@ export const ContentProvider = ({ children }) => {
     } catch (err) {
       console.error(`Fetch attempt ${retryCount + 1} failed:`, err.message);
       
-      // If server is sleeping (timeout or 503/502), retry up to 5 times (total ~60-90s)
-      if (retryCount < 5) {
+      // If server is sleeping (timeout or 503/502), retry up to 12 times (total ~3 mins)
+      if (retryCount < 12) {
         setServerStatus('waking');
-        setTimeout(() => fetchContent(retryCount + 1), 5000 * (retryCount + 1)); // Exponential backoff-ish
+        setTimeout(() => fetchContent(retryCount + 1), 7000); 
       } else {
         setServerStatus('error');
         setLoading(false);
