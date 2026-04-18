@@ -66,6 +66,7 @@ const initDb = async () => {
         email TEXT NOT NULL,
         interest TEXT,
         message TEXT,
+        is_read BOOLEAN DEFAULT FALSE,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
       );
     `);
@@ -148,6 +149,15 @@ app.get('/api/submissions', authenticateToken, async (req, res) => {
   try {
     const result = await pool.query('SELECT * FROM contact_submissions ORDER BY created_at DESC');
     res.json(result.rows);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+app.put('/api/submissions/read', authenticateToken, async (req, res) => {
+  try {
+    await pool.query('UPDATE contact_submissions SET is_read = TRUE WHERE is_read = FALSE');
+    res.json({ success: true });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }

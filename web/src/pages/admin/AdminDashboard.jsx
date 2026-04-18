@@ -38,6 +38,19 @@ export default function AdminDashboard() {
     }
   };
 
+  const markAsRead = async () => {
+    try {
+      await fetch(`${API_URL}/api/submissions/read`, {
+        method: 'PUT',
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
+      // Update local state to reflect read status
+      setSubmissions(prev => prev.map(s => ({ ...s, is_read: true })));
+    } catch (err) {
+      console.error("Failed to mark as read", err);
+    }
+  };
+
   const deleteSubmission = async (id) => {
     if (!window.confirm('Delete this inquiry?')) return;
     try {
@@ -202,9 +215,21 @@ export default function AdminDashboard() {
             onClick={() => {
               setView('leads');
               setShowNav(false);
+              markAsRead(); // Logic like WhatsApp: viewed = read
             }}
           >
-            Leads {submissions.length > 0 && <span style={{float: 'right', background: 'var(--adm-teal)', color: 'white', padding: '2px 8px', borderRadius: '10px', fontSize: '0.7rem'}}>{submissions.length}</span>}
+            Leads {submissions.filter(s => !s.is_read).length > 0 && (
+              <span style={{
+                float: 'right', 
+                background: '#ef4444', // Red for emphasis
+                color: 'white', 
+                padding: '2px 6px', 
+                borderRadius: '6px', 
+                fontSize: '0.65rem'
+              }}>
+                {submissions.filter(s => !s.is_read).length}
+              </span>
+            )}
           </button>
         </div>
 
@@ -249,22 +274,31 @@ export default function AdminDashboard() {
                   <p style={{color: '#94a3b8', textAlign: 'center', padding: '4rem'}}>No inquiries yet.</p>
                 ) : (
                   submissions.map(lead => (
-                    <div key={lead.id} className="lead-card">
+                    <div key={lead.id} className={`lead-card ${!lead.is_read ? 'is-new' : ''}`}>
                        <div className="lead-header">
-                          <div>
-                            <h3>{lead.name}</h3>
-                            <a href={`mailto:${lead.email}`} style={{color: 'var(--adm-teal)', fontSize: '0.9rem', textDecoration: 'none'}}>{lead.email}</a>
+                          <div className="lead-sender">
+                            <span className="lead-avatar">{lead.name[0]}</span>
+                            <div className="lead-sender-info">
+                               <h3>{lead.name}</h3>
+                               <a href={`mailto:${lead.email}`}>{lead.email}</a>
+                            </div>
                           </div>
-                          <button className="btn-delete" onClick={() => deleteSubmission(lead.id)}>✕</button>
+                          <div className="lead-actions">
+                             {!lead.is_read && <span className="status-badge">NEW</span>}
+                             <button className="btn-delete" title="Delete Inquiry" onClick={() => deleteSubmission(lead.id)}>✕</button>
+                          </div>
                        </div>
-                       <div className="lead-intent">
-                          <strong>Interested in:</strong> {lead.interest}
-                       </div>
-                       <div className="lead-message">
-                          {lead.message}
+                       <div className="lead-body">
+                          <div className="lead-intent">
+                             <span className="label">INTENT</span>
+                             <span className="value">{lead.interest}</span>
+                          </div>
+                          <div className="lead-message">
+                             {lead.message}
+                          </div>
                        </div>
                        <div className="lead-footer">
-                          {new Date(lead.created_at).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' })}
+                          <span className="time">🕒 {new Date(lead.created_at).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' })}</span>
                        </div>
                     </div>
                   ))

@@ -509,78 +509,138 @@
   background: var(--adm-teal);
 }
 
-/* Leads Tracking */
+/* Leads Tracking (WhatsApp Style) */
 .leads-list {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 2rem;
 }
 
 .lead-card {
   background: #fff;
   border: 1px solid var(--adm-border);
-  padding: 1.5rem;
-  border-radius: 12px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+  padding: 2rem;
+  border-radius: 16px;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.lead-card.is-new {
+  border-left: 4px solid var(--adm-teal);
+  background: #f0fdfa; /* Very light teal tint */
 }
 
 .lead-header {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
-  margin-bottom: 1rem;
+  align-items: center;
+  margin-bottom: 2rem;
 }
 
-.lead-header h3 {
-  font-size: 1.1rem;
-  font-weight: 800;
-  margin-bottom: 0.25rem;
+.lead-sender {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
 }
 
-.btn-delete {
-  background: #fef2f2;
-  color: #ef4444;
-  border: none;
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  font-size: 0.8rem;
+.lead-avatar {
+  width: 48px;
+  height: 48px;
+  background: #0f172a;
+  color: #fff;
+  border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
+  font-weight: 900;
+  text-transform: uppercase;
+  font-size: 1.2rem;
+}
+
+.lead-sender-info h3 {
+  font-size: 1.15rem;
+  font-weight: 900;
+  margin: 0 0 0.25rem 0;
+}
+
+.lead-sender-info a {
+  font-size: 0.85rem;
+  color: var(--adm-teal);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.lead-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.status-badge {
+  background: #0d9488;
+  color: white;
+  font-size: 0.65rem;
+  font-weight: 900;
+  padding: 4px 10px;
+  border-radius: 50px;
+  letter-spacing: 0.05em;
+}
+
+.btn-delete {
+  background: transparent;
+  color: #94a3b8;
+  border: 1px solid #e2e8f0;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
   cursor: pointer;
   transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .btn-delete:hover {
   background: #ef4444;
   color: #fff;
+  border-color: #ef4444;
 }
 
 .lead-intent {
-  font-size: 0.85rem;
-  color: #64748b;
-  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin-bottom: 1.5rem;
 }
 
-.lead-intent strong {
-  color: var(--adm-text);
+.lead-intent .label {
+  font-size: 0.6rem;
+  font-weight: 900;
+  color: #94a3b8;
+  letter-spacing: 0.1em;
+}
+
+.lead-intent .value {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #475569;
 }
 
 .lead-message {
-  font-size: 0.95rem;
-  line-height: 1.6;
+  font-size: 1rem;
+  line-height: 1.7;
   color: #334155;
   background: #f8fafc;
-  padding: 1rem;
-  border-radius: 8px;
-  margin-bottom: 1rem;
+  padding: 1.5rem;
+  border-radius: 12px;
+  margin-bottom: 1.5rem;
+  border: 1px dashed #e2e8f0;
 }
 
 .lead-footer {
-  font-size: 0.75rem;
+  font-size: 0.8rem;
   color: #94a3b8;
-  font-family: monospace;
+  font-weight: 600;
 }
 
 
